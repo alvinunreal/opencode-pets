@@ -27,11 +27,11 @@ describe("OpenCode event mapping", () => {
     expect(isEditTool("apply_patch")).toBe(true);
   });
 
-  it("prints self-contained protocol helper", () => {
-    const plugin = pluginSnippet();
-    expect(plugin).toContain("OPENPETS_BASE_URL");
-    expect(plugin).toContain("/health");
-    expect(plugin).toContain("/event");
+  it("prints self-contained CLI-backed plugin helper", () => {
+    const plugin = pluginSnippet(["bun", "/tmp/openpets-cli.ts"]);
+    expect(plugin).toContain("OPENPETS_COMMAND");
+    expect(plugin).toContain("/tmp/openpets-cli.ts");
+    expect(plugin).toContain("event");
     expect(plugin).toContain("OpenPets is optional");
   });
 });

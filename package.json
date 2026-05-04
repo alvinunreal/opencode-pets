@@ -1,7 +1,23 @@
 {
   "name": "opencode-pets",
   "version": "0.0.0",
+  "description": "OpenCode plugin installer for OpenPets desktop pet status updates.",
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvinunreal/opencode-pets.git"
+  },
+  "keywords": [
+    "opencode",
+    "openpets",
+    "plugin",
+    "desktop-pet",
+    "bun",
+    "typescript",
+    "ai-agents",
+    "local-first"
+  ],
   "bin": {
     "opencode-pets": "./src/cli.ts"
   },

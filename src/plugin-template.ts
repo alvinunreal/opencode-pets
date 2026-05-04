@@ -1,36 +1,25 @@
-export function openCodePluginSource() {
+export function openCodePluginSource(command: string[] = ["bunx", "openpets"]) {
+  const commandJson = JSON.stringify(command);
   return `import type { Plugin } from "@opencode-ai/plugin"
+import { spawn } from "node:child_process"
 
-const OPENPETS_BASE_URL = (process.env.OPENPETS_BASE_URL ?? "http://127.0.0.1:4738").replace(/\\/+$/, "")
-
-async function request(path, init, timeoutMs = 400) {
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), timeoutMs)
-  try {
-    const response = await fetch(OPENPETS_BASE_URL + path, { ...init, signal: controller.signal })
-    return await response.json().catch(() => null)
-  } finally {
-    clearTimeout(timeout)
-  }
-}
-
-let verified = false
+const OPENPETS_COMMAND = ${commandJson}
 
 async function send(event) {
-  try {
-    if (!verified) {
-      const health = await request("/health", { method: "GET" })
-      if (health?.app !== "openpets" || health?.protocolVersion !== 1) return
-      verified = true
-    }
-    await request("/event", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(event),
+  // OpenPets is optional. Never break OpenCode.
+  await new Promise((resolve) => {
+    const [cmd, ...baseArgs] = OPENPETS_COMMAND
+    const args = [...baseArgs, "event", event.state, "--source", event.source, "--type", event.type]
+    if (event.tool) args.push("--tool", event.tool)
+    const child = spawn(cmd, args, {
+      stdio: "ignore",
+      detached: false,
     })
-  } catch {
-    // OpenPets is optional. Never break OpenCode.
-  }
+    const done = () => resolve(undefined)
+    child.on("error", done)
+    child.on("exit", done)
+    setTimeout(done, 500)
+  })
 }
 
 function event(state, type, extra = {}) {
