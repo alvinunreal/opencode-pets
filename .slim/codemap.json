@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_run": "2026-05-05T12:46:17.125Z",
+    "root": "/home/alvin/pets/opencode-pets",
+    "include_patterns": [
+      "package.json",
+      "src/**/*.ts"
+    ],
+    "exclude_patterns": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      "docs/**",
+      "**/*.md",
+      "node_modules/**",
+      "dist/**"
+    ],
+    "exceptions": []
+  },
+  "file_hashes": {
+    "package.json": "267b0f68b2392433ee38b040a1959b71",
+    "src/cli.ts": "81c0db1372fbc407be9f891de763dd82",
+    "src/install.ts": "5d86553f0bd4c279e158d38f0344de11",
+    "src/map-opencode-event.ts": "52bd7bf2d79114cb80160780032a5394",
+    "src/plugin-template.ts": "05079268262522115f9aaf19646f03f9"
+  },
+  "folder_hashes": {
+    ".": "c2c1bdf41de1017055a10459ce143814",
+    "src": "944df4b1d1cf943d477a0493a02ccc35"
+  }
+}
