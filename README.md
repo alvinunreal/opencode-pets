@@ -18,6 +18,8 @@
 
 OpenCode Pets connects OpenCode to [OpenPets](https://github.com/alvinunreal/openpets), a local desktop pet for coding agents.
 
+OpenPets is the required desktop app/runtime. Install it from [github.com/alvinunreal/openpets](https://github.com/alvinunreal/openpets) before enabling the OpenCode plugin.
+
 It installs an OpenCode plugin that maps agent activity to simple pet states:
 
 - session busy → thinking
